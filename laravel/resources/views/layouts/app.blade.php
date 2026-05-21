@@ -12,6 +12,8 @@
         <a class="navbar-brand" href="{{ route('dashboard') }}">TaskFlow</a>
         @auth
         <div class="d-flex align-items-center gap-3">
+            <a href="{{ route('tasks.index') }}" class="text-white text-decoration-none">Задачи</a>
+            <a href="{{ route('categories.index') }}" class="text-white text-decoration-none">Категории</a>
             @if(auth()->user()->isAdmin())
                 <span class="badge bg-warning text-dark">Admin</span>
             @endif
@@ -24,6 +26,7 @@
         @endauth
     </div>
 </nav>
+
 <main class="container py-4">
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
