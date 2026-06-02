@@ -19,7 +19,7 @@ class DashboardController extends Controller
                 'in_progress' => $tasks->where('status', 'in_progress')->count(),
                 'done' => $tasks->where('status', 'done')->count(),
             ],
-            'recentTasks' => $user->tasks()->with('category')->latest()->take(5)->get()
+            'recentTasks' => $user->tasks()->with('categories')->latest()->take(5)->get()
         ]);
     }
 }

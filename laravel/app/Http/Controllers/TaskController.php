@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,7 @@ class TaskController extends Controller
         $user = Auth::user();
         $tasks = $user
             ->tasks()
-            ->with('category')
+            ->with('categories')
             ->latest()
             ->paginate(10);
 
@@ -23,7 +24,7 @@ class TaskController extends Controller
     {
         $data = $request->validate([
             "title"     => "string|max:255",
-            "description"    => "string|nullable",
+            "description"    => "string|nullable|required",
             "status" => "required|in:pending,in_progress,done",
             "priority" => "required|in:low,medium,high",
             "due_date" => "nullable|after_or_equal:today",
@@ -49,8 +50,9 @@ class TaskController extends Controller
     {
 
     }
-    public function destroy()
+    public function destroy(Task $task)
     {
-        
+        $task->delete();
+        return redirect()->route('tasks.index')->with('success', '');
     }
 }

@@ -8,9 +8,9 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('dashboard');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('dashboard');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'show'])->name('register');

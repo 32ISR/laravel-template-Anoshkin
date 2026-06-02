@@ -16,16 +16,19 @@ class Task extends Model
         'category_id',
         'user_id'
     ];
-    public function tasks()
+
+    protected $casts = [
+        "due_date" => "date"
+    ];
+
+    public function categories()
     {
-        return $this->hasMany
-        (Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function user()
     {
-        return $this->belongsTo
-        (User::class);
+        return $this->belongsTo(User::class);
     }
     
 }
